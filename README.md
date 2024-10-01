@@ -83,7 +83,7 @@ Some of the features ReVanced CLI provides are:
 
 You can download the most recent version of ReVanced CLI from
 [here](https://github.com/inotia00/revanced-cli/releases/latest).  
-Learn how to use ReVanced CLI by following [this document](https://github.com/inotia00/revanced-documentation/blob/main/docs/revanced-cli.md).
+Learn how to use ReVanced CLI to build ReVanced Extended apps by following [this document](https://github.com/inotia00/revanced-documentation/blob/main/docs/revanced-cli.md).
 
 ## 📚 Everything else
 

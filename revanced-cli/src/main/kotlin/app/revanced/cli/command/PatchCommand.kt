@@ -119,7 +119,7 @@ internal object PatchCommand : Runnable {
         names = ["--keystore-password"],
         description = ["The password of the keystore to sign the patched APK file with. Empty password by default."],
     )
-    private var keyStorePassword: String? = "ReVanced" // Legacy password
+    private var keyStorePassword: String? = null // Empty password by default
 
     @CommandLine.Option(
         names = ["--alias"],
@@ -136,13 +136,13 @@ internal object PatchCommand : Runnable {
         description = ["The alias of the keystore entry to sign the patched APK file with."],
         showDefaultValue = ALWAYS,
     )
-    private var keyStoreEntryAlias = "alias" // Legacy alias
+    private var keyStoreEntryAlias = "ReVanced Key"
 
     @CommandLine.Option(
         names = ["--keystore-entry-password"],
         description = ["The password of the entry from the keystore for the key to sign the patched APK file with."],
     )
-    private var keyStoreEntryPassword = "ReVanced" // Legacy password
+    private var keyStoreEntryPassword = "" // Empty password by default
 
     @CommandLine.Option(
         names = ["--signer"],

@@ -79,11 +79,11 @@ Some of the features ReVanced CLI provides are:
 - 📃 **List patches from patch bundles**: List available patches, compatible packages, and versions
 - 💪 **Flexibility and functionality**: Apply any combination of patches to any version of Android apps
 
-## 🔽 Download
+## 🔽 Download and Usage
 
 You can download the most recent version of ReVanced CLI from
-[here](https://github.com/ReVanced/revanced-cli/releases/latest).  
-Learn how to use ReVanced CLI by following the [documentation](/docs).
+[here](https://github.com/inotia00/revanced-cli/releases/latest).  
+Learn how to use ReVanced CLI to build ReVanced Extended apps by following [this document](https://github.com/inotia00/revanced-documentation/blob/main/docs/revanced-cli.md).
 
 ## 📚 Everything else
 

@@ -13,11 +13,11 @@ import java.nio.file.Paths
 import java.util.logging.Logger
 
 @Command(
-    name = "json",
+    name = "patches",
     description = ["Generate patches file from RVP files."],
 )
-internal object JsonCommand : Runnable {
-    private val logger = Logger.getLogger(JsonCommand::class.java.name)
+internal object PathesCommand : Runnable {
+    private val logger = Logger.getLogger(PathesCommand::class.java.name)
 
     @Parameters(
         description = ["Paths to RVP files."],

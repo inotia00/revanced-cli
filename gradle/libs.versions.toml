@@ -1,7 +1,7 @@
 [versions]
-shadow = "8.1.1"
-kotlin = "2.0.20"
-kotlinx = "1.8.1"
+shadow = "9.0.0-beta2"
+kotlin = "2.0.21"
+kotlinx = "1.9.0"
 picocli = "4.7.6"
 revanced-patcher = "21.0.0"
 revanced-library = "3.0.2"
@@ -14,5 +14,5 @@ revanced-patcher = { module = "app.revanced:revanced-patcher", version.ref = "re
 revanced-library = { module = "app.revanced:revanced-library-jvm", version.ref = "revanced-library" }
 
 [plugins]
-shadow = { id = "com.github.johnrengelman.shadow", version.ref = "shadow" }
+shadow = { id = "com.gradleup.shadow", version.ref = "shadow" }
 kotlin = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }

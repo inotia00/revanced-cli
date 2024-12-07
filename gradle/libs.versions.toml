@@ -4,6 +4,7 @@ kotlin = "2.0.21"
 kotlinx = "1.9.0"
 picocli = "4.7.6"
 revanced-patcher = "21.0.0"
+revanced-library = "1.0.0"
 gson = "2.11.0"
 
 [libraries]
@@ -12,6 +13,7 @@ kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotl
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx" }
 picocli = { module = "info.picocli:picocli", version.ref = "picocli" }
 revanced-patcher = { module = "app.revanced:revanced-patcher", version.ref = "revanced-patcher" }
+revanced-library = { module = "app.revanced:revanced-library-jvm", version.ref = "revanced-library" }
 
 [plugins]
 shadow = { id = "com.gradleup.shadow", version.ref = "shadow" }

@@ -10,6 +10,9 @@ plugins {
 
 group = "app.revanced"
 
+val githubUser = project.findProperty("gpr.user") as String? ?: System.getenv("GITHUB_ACTOR")
+val githubToken = project.findProperty("gpr.key") as String? ?: System.getenv("GITHUB_TOKEN")
+
 application {
     mainClass = "app.revanced.cli.command.MainCommandKt"
 }
@@ -19,21 +22,28 @@ repositories {
     google()
     maven {
         // A repository must be specified for some reason. "registry" is a dummy.
-        url = uri("https://maven.pkg.github.com/revanced/registry")
+        url = uri("https://maven.pkg.github.com/inotia00/registry")
         credentials {
-            username = project.findProperty("gpr.user") as String? ?: System.getenv("GITHUB_ACTOR")
-            password = project.findProperty("gpr.key") as String? ?: System.getenv("GITHUB_TOKEN")
+            username = githubUser
+            password = githubToken
         }
     }
-    maven { url = uri("https://s01.oss.sonatype.org/content/repositories/snapshots") }
+    maven {
+        // A repository must be specified for some reason. "registry" is a dummy.
+        url = uri("https://maven.pkg.github.com/revanced/registry")
+        credentials {
+            username = githubUser
+            password = githubToken
+        }
+    }
 }
 
 dependencies {
     implementation(libs.revanced.patcher)
+    implementation(libs.revanced.library)
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.picocli)
     implementation(libs.gson)
-    implementation("io.github.inotia00:revanced-library-jvm:3.1.1-SNAPSHOT")
 
     testImplementation(libs.kotlin.test)
 }

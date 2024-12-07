@@ -10,6 +10,7 @@ import app.revanced.patcher.Patcher
 import app.revanced.patcher.PatcherConfig
 import app.revanced.patcher.patch.Patch
 import app.revanced.patcher.patch.loadPatchesFromJar
+import com.reandroid.apkeditor.BundleMerger
 import kotlinx.coroutines.runBlocking
 import picocli.CommandLine
 import picocli.CommandLine.ArgGroup
@@ -249,6 +250,12 @@ internal object PatchCommand : Runnable {
 
     override fun run() {
         // region Setup
+
+        if (apk.extension != "apk") {
+            logger.info("Merge bundle")
+            apk = BundleMerger.mergeBundle(apk, null)
+            logger.info("Merged to ${apk.path}")
+        }
 
         val outputFilePath =
             outputFilePath ?: File("").absoluteFile.resolve(

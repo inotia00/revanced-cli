@@ -35,6 +35,7 @@ private object CLIVersionProvider : IVersionProvider {
     subcommands = [
         PatchCommand::class,
         JsonCommand::class,
+        OptionsCommand::class,
         ListPatchesCommand::class,
         ListCompatibleVersions::class,
         UtilityCommand::class,

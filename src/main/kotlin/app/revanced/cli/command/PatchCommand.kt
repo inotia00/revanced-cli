@@ -2,6 +2,8 @@ package app.revanced.cli.command
 
 import app.revanced.library.ApkUtils
 import app.revanced.library.ApkUtils.applyTo
+import app.revanced.library.Options
+import app.revanced.library.Options.setOptions
 import app.revanced.library.installation.installer.*
 import app.revanced.library.setOptions
 import app.revanced.patcher.Patcher
@@ -186,6 +188,12 @@ internal object PatchCommand : Runnable {
     private var ripLibs = arrayOf<String>()
 
     @CommandLine.Option(
+        names = ["--legacy-options"],
+        description = ["Path to patch options JSON file."],
+    )
+    private var optionsFile: File? = null
+
+    @CommandLine.Option(
         names = ["--purge"],
         description = ["Purge temporary files directory after patching."],
         showDefaultValue = ALWAYS,
@@ -252,6 +260,11 @@ internal object PatchCommand : Runnable {
                 "${outputFilePath.nameWithoutExtension}-temporary-files",
             )
 
+        val optionsFile =
+            optionsFile ?: outputFilePath.parentFile.resolve(
+                "${outputFilePath.nameWithoutExtension}-options.json",
+            )
+
         val keystoreFilePath =
             keyStoreFilePath ?: outputFilePath.parentFile
                 .resolve("${outputFilePath.nameWithoutExtension}.keystore")
@@ -308,16 +321,26 @@ internal object PatchCommand : Runnable {
             val packageVersion = patcher.context.packageMetadata.packageVersion
 
             val filteredPatches = patches.filterPatchSelection(packageName, packageVersion)
+            val patchesList = patches.toList()
 
             logger.info("Setting patch options")
 
-            val patchesList = patches.toList()
-            selection.filter { it.enabled != null }.associate {
+            val selectionMap = selection.filter {
+                val enabledSelection = it.enabled
+                enabledSelection != null && enabledSelection.options.isNotEmpty()
+            }.associate {
                 val enabledSelection = it.enabled!!
 
                 (enabledSelection.selector.name ?: patchesList[enabledSelection.selector.index!!].name!!) to
-                    enabledSelection.options
-            }.let(filteredPatches::setOptions)
+                        enabledSelection.options
+            }
+            if (selectionMap.isNotEmpty()) {
+                selectionMap.let(filteredPatches::setOptions)
+            } else if (optionsFile.exists()) {
+                patches.setOptions(optionsFile)
+            } else {
+                Options.serialize(patches, prettyPrint = true).let(optionsFile::writeText)
+            }
 
             patcher += filteredPatches
 

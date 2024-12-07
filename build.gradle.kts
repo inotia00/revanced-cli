@@ -32,6 +32,7 @@ dependencies {
     implementation(libs.revanced.patcher)
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.picocli)
+    implementation(libs.gson)
     implementation("io.github.inotia00:revanced-library-jvm:3.1.1-SNAPSHOT")
 
     testImplementation(libs.kotlin.test)

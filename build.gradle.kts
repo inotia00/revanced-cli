@@ -25,13 +25,14 @@ repositories {
             password = project.findProperty("gpr.key") as String? ?: System.getenv("GITHUB_TOKEN")
         }
     }
+    maven { url = uri("https://s01.oss.sonatype.org/content/repositories/snapshots") }
 }
 
 dependencies {
     implementation(libs.revanced.patcher)
-    implementation(libs.revanced.library)
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.picocli)
+    implementation("io.github.inotia00:revanced-library-jvm:3.1.1-SNAPSHOT")
 
     testImplementation(libs.kotlin.test)
 }

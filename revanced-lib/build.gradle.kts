@@ -1,5 +1,5 @@
 plugins {
-    kotlin("jvm") version "2.0.20"
+    kotlin("jvm") version "2.0.21"
 }
 
 repositories {
@@ -23,7 +23,7 @@ dependencies {
     implementation(libs.jackson.module.kotlin)
     implementation(libs.apkzlib)
     implementation(libs.apksig)
-    implementation(libs.bcpkix.jdk15on)
+    implementation(libs.bcpkix.jdk18on)
     implementation(libs.guava)
 }
 

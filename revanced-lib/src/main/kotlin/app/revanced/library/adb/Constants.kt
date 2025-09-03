@@ -3,6 +3,7 @@ package app.revanced.library.adb
 internal object Constants {
     internal const val PLACEHOLDER = "PLACEHOLDER"
 
+    const val SELINUX_CONTEXT = "u:object_r:apk_data_file:s0"
     internal const val TMP_PATH = "/data/local/tmp/revanced.tmp"
     internal const val INSTALLATION_PATH = "/data/adb/revanced/"
     internal const val PATCHED_APK_PATH = "$INSTALLATION_PATH$PLACEHOLDER.apk"
@@ -19,10 +20,10 @@ internal object Constants {
             "mv $TMP_PATH ${'$'}base_path && " +
             "chmod 644 ${'$'}base_path && " +
             "chown system:system ${'$'}base_path && " +
-            "chcon u:object_r:apk_data_file:s0  ${'$'}base_path"
+            "chcon $SELINUX_CONTEXT ${'$'}base_path"
 
     internal const val UMOUNT =
-        "grep $PLACEHOLDER /proc/mounts | while read -r line; do echo ${'$'}line | cut -d ' ' -f 2 | sed 's/apk.*/apk/' | xargs -r umount -l; done"
+        "grep -F $PLACEHOLDER /proc/mounts | while read -r line; do echo ${'$'}line | cut -d ' ' -f 2 | sed 's/apk.*/apk/' | xargs -r umount -l; done"
 
     internal const val INSTALL_MOUNT_SCRIPT = "mv $TMP_PATH $MOUNT_SCRIPT_PATH && chmod +x $MOUNT_SCRIPT_PATH"
 
@@ -45,7 +46,7 @@ internal object Constants {
         base_path="$PATCHED_APK_PATH"
         stock_path=$( pm path $PLACEHOLDER | grep base | sed 's/package://g' )
 
-        chcon u:object_r:apk_data_file:s0 ${'$'}base_path
+        chcon $SELINUX_CONTEXT ${'$'}base_path
         mount -o bind ${'$'}MIRROR${'$'}base_path ${'$'}stock_path
 
         # Kill the app to force it to restart the mounted APK in case it's currently running.

@@ -81,7 +81,12 @@ object Options {
                 jsonPatches[patch.name]?.let { jsonPatchOptions ->
                     jsonPatchOptions.forEach { (option, value) ->
                         try {
-                            patch.options[option] = value
+                            // Exception handling for 'Handle custom twitter links' patch in Piko Twitter.
+                            if (value != null && value::class.qualifiedName == "java.util.ArrayList") {
+                                patch.options[option] = (value as ArrayList<String>).toArray(arrayOfNulls<String>(0))
+                            } else {
+                                patch.options[option] = value
+                            }
                         } catch (e: PatchOptionException) {
                             logger.warning("Could not set option value for the ${patch.name} patch: ${e.message}")
                         }

@@ -4,7 +4,7 @@ kotlin = "2.0.21"
 kotlinx = "1.9.0"
 picocli = "4.7.7"
 revanced-patcher = "21.0.0"
-revanced-library = "1.0.0"
+revanced-library = "1.0.1"
 gson = "2.13.2"
 
 [libraries]

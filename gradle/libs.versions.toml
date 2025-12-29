@@ -1,11 +1,11 @@
 [versions]
-shadow = "9.0.0-beta2"
+shadow = "8.3.9"
 kotlin = "2.0.21"
 kotlinx = "1.9.0"
-picocli = "4.7.6"
+picocli = "4.7.7"
 revanced-patcher = "21.0.0"
 revanced-library = "1.0.0"
-gson = "2.11.0"
+gson = "2.13.2"
 
 [libraries]
 gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
